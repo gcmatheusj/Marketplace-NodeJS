@@ -13,10 +13,6 @@ const PurchaseSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true
-  },
-  sold: {
-    type: Boolean,
-    default: false
   }
 })
 
