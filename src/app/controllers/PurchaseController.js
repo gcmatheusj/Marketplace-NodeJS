@@ -9,6 +9,11 @@ class PurchaseController {
     const { ad, content } = req.body
 
     const purchaseAd = await Ad.findById(ad).populate('author')
+
+    if (purchaseAd.purchaseBy) {
+      return res.status(400).json({ error: 'Ad already sold' })
+    }
+
     const user = await User.findById(req.userId)
 
     Queue.create(PurchaseMail.key, {
@@ -18,7 +23,7 @@ class PurchaseController {
     }).save()
 
     const purchase = await Purchase.create({
-      title: purchaseAd.title,
+      ad: purchaseAd,
       buyer: user,
       content
     })

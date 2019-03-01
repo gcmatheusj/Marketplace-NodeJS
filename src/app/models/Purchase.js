@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 
 const PurchaseSchema = new mongoose.Schema({
-  title: {
-    type: String,
+  ad: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ad',
     required: true
   },
   buyer: {
